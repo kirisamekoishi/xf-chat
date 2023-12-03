@@ -1,5 +1,5 @@
 <script setup>
-import XunFeiChat from '../components/XunFeiChat.vue'
+import xunFeiChat from '@/views/layout/xunFeiChat.vue'
 </script>
 
 <template>
@@ -15,7 +15,7 @@ import XunFeiChat from '../components/XunFeiChat.vue'
   
       </div>
       <div role="presentation" class="flex h-full flex-col">
-        <XunFeiChat />
+        <xunFeiChat />
       </div>
     </div>
   </main>
