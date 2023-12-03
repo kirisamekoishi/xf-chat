@@ -1,0 +1,131 @@
+*{
+  --tw-border-spacing-x: 0;
+  --tw-border-spacing-y: 0;
+  --tw-translate-x: 0;
+  --tw-translate-y: 0;
+  --tw-rotate: 0;
+  --tw-skew-x: 0;
+  --tw-skew-y: 0;
+  --tw-scale-x: 1;
+  --tw-scale-y: 1;
+  --tw-pan-x: ;
+  --tw-pan-y: ;
+  --tw-pinch-zoom: ;
+  --tw-scroll-snap-strictness: proximity;
+  --tw-gradient-from-position: ;
+  --tw-gradient-via-position: ;
+  --tw-gradient-to-position: ;
+  --tw-ordinal: ;
+  --tw-slashed-zero: ;
+  --tw-numeric-figure: ;
+  --tw-numeric-spacing: ;
+  --tw-numeric-fraction: ;
+  --tw-ring-inset: ;
+  --tw-ring-offset-width: 0px;
+  --tw-ring-offset-color: #fff;
+  --tw-ring-color: rgba(69,89,164,.5);
+  --tw-ring-offset-shadow: 0 0 transparent;
+  --tw-ring-shadow: 0 0 transparent;
+  --tw-shadow: 0 0 transparent;
+  --tw-shadow-colored: 0 0 transparent;
+  --tw-blur: ;
+  --tw-brightness: ;
+  --tw-contrast: ;
+  --tw-grayscale: ;
+  --tw-hue-rotate: ;
+  --tw-invert: ;
+  --tw-saturate: ;
+  --tw-sepia: ;
+  --tw-drop-shadow: ;
+  --tw-backdrop-blur: ;
+  --tw-backdrop-brightness: ;
+  --tw-backdrop-contrast: ;
+  --tw-backdrop-grayscale: ;
+  --tw-backdrop-hue-rotate: ;
+  --tw-backdrop-invert: ;
+  --tw-backdrop-opacity: ;
+  --tw-backdrop-saturate: ;
+  --tw-backdrop-sepia: ;
+}
+
+html{
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  width: 100%;
+  display: block;
+}
+
+body{
+  margin: 0;
+  height: 100%;
+  line-height: inherit;
+}
+
+.relative{
+  /* 设置元素的相对位置。 */
+  position: relative;
+}
+
+.flex {
+  /* 设置为 flex 布局时，其子元素将自动按照指定的列数和间距排列 */
+  display: flex;
+}
+
+.z_0 {
+  /* 设置元素的 z 轴位置。 */
+  z-index: 0;
+}
+
+.h-full {
+  height: 100%;
+}
+
+.w-full {
+  width: 100%;
+}
+
+.overflow-hidden {
+  /* 设置溢出隐藏。 */
+  overflow: hidden;
+}
+
+.overflow-auto {
+  overflow: auto;
+}
+
+.max-w-full {
+  /* 设置最大宽度。 */
+  max-width: 100%;
+}
+
+.flex-col {
+  /* 将元素设置为纵向排列。 */
+  flex-direction: column;
+}
+
+.flex-1 {
+  /* 将元素设置为 flex 布局，并将其子元素设置为自动扩展以填充其父元素。 */
+  flex: 1 1 0%;
+}
+
+.flex-shrink-0 {
+  /* 将元素在所在行（水平方向）上的缩小比例设置为0，即不允许多少缩小。 */
+  flex-shrink: 0;
+}
+
+.items-center {
+  /* 将元素内的子元素水平居中。 */
+  align-items: center;
+}
+
+.items-stretch {
+  /* 将沿着主轴（水平轴）进行拉伸，以填充容器。这样，无论容器有多大，项目都将根据其大小进行调整，从而保持响应式布局。 */
+  align-items: stretch;
+}
+
+.justify-center {
+  /* 将元素内的子元素在所在行（水平方向）上居中。 */
+  justify-content: center;
+}
+
