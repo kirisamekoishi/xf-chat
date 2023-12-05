@@ -26,7 +26,16 @@ const router = createRouter({
     {
       path: '/home',
       name: 'home',
-      component: HomeView
+      component: HomeView,
+      redirect: '/xunfei-chat',
+      children: [
+        {
+          path: '/xunfei-chat',
+          name: 'xunfei-chat',
+          component: () => import('@/views/home/components/xunFeiChat.vue')
+        },
+        // 嵌套用户的聊天历史记录id，实现跳转路由
+      ]
     },
     
   ]
