@@ -5,12 +5,18 @@
     </div>
     <div class="login__form">
       <el-form ref="loginFormRef" :model="UserForm">
-        <el-form-item label="账号">
-          <el-input v-model="UserForm.userAccount" />
+        <el-form-item>
+          <el-input v-model="UserForm.userAccount" 
+          placeholder="账号"/>
         </el-form-item>
 
-        <el-form-item label="密码">
-          <el-input v-model="UserForm.userPassword" />
+        <el-form-item>
+          <el-input
+            v-model="UserForm.userPassword"
+            type="password"
+            placeholder="密码"
+            show-password
+          />
         </el-form-item>
 
         <div class="login__btn flex flex-col items-center justify-center">
@@ -37,7 +43,11 @@
 
 <script setup>
 import { ref, reactive } from "vue";
+import { useRouter } from "vue-router";
 import service from "@/utils/request.js";
+
+// 实现路由跳转
+const router = useRouter();
 
 // 登录表单
 const UserForm = reactive({
@@ -61,8 +71,9 @@ const handleLogin = () => {
 
 // 跳转到注册页面 方法
 const handleJumpRegister = () => {
-
-}
+  console.log("register");
+  router.push("register");
+};
 </script>
 
 <style lang="scss" scoped>
@@ -71,6 +82,9 @@ const handleJumpRegister = () => {
   padding: 32px;
 
   &__title {
+    font-size: -webkit-xxx-large;
+    font-weight: 600;
+    color: #333;
     line-height: 100%;
     padding: 0 20px 20px;
   }
