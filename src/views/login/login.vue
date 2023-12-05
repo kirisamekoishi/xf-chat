@@ -63,10 +63,14 @@ const handleLogin = () => {
     .post("/api/user/login", UserForm)
     .then(function (response) {
       console.log(response);
+      // 功能未完善
+      router.push('home')
     })
     .catch(function (error) {
       console.log(error);
     });
+
+
 };
 
 // 跳转到注册页面 方法
