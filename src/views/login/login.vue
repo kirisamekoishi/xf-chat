@@ -78,6 +78,7 @@ const handleJumpRegister = () => {
 
 <style lang="scss" scoped>
 .login {
+    min-width: 280px;
   background-color: antiquewhite;
   padding: 32px;
 

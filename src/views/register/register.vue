@@ -8,7 +8,7 @@
         <el-form-item>
           <el-input
             v-model="UserForm.userAccount"
-            placeholder="Please input account"
+            placeholder="请输入账号名"
           />
         </el-form-item>
 
@@ -92,6 +92,7 @@ const handleRegister = () => {
 
 <style lang="scss" scoped>
 .register {
+  min-width: 280px;
   background-color: antiquewhite;
   padding: 32px;
 
