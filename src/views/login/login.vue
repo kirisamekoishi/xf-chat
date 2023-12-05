@@ -6,34 +6,36 @@
     <div class="login__form">
       <el-form ref="loginFormRef" :model="UserForm">
         <el-form-item>
-          <el-input v-model="UserForm.userAccount" 
-          placeholder="账号"/>
+          <el-input v-model="UserForm.userAccount"
+                    placeholder="账号"/>
         </el-form-item>
 
         <el-form-item>
           <el-input
-            v-model="UserForm.userPassword"
-            type="password"
-            placeholder="密码"
-            show-password
+              v-model="UserForm.userPassword"
+              type="password"
+              placeholder="密码"
+              show-password
           />
         </el-form-item>
 
         <div class="login__btn flex flex-col items-center justify-center">
           <el-button type="primary" @click="handleLogin" class="w-full"
-            >登录</el-button
+          >登录
+          </el-button
           >
         </div>
 
         <div
-          class="login__tips flex flex-col w-full items-center justify-center"
+            class="login__tips flex flex-col w-full items-center justify-center"
         >
           没有账号？
         </div>
 
         <div class="login__btn flex flex-col items-center justify-center">
           <el-button type="success" @click="handleJumpRegister" class="w-full"
-            >注册</el-button
+          >注册
+          </el-button
           >
         </div>
       </el-form>
@@ -42,8 +44,8 @@
 </template>
 
 <script setup>
-import { ref, reactive } from "vue";
-import { useRouter } from "vue-router";
+import {ref, reactive} from "vue";
+import {useRouter} from "vue-router";
 import service from "@/utils/request.js";
 
 // 实现路由跳转
@@ -60,15 +62,15 @@ const loginFormRef = ref(null);
 // 登录请求
 const handleLogin = () => {
   service
-    .post("/api/user/login", UserForm)
-    .then(function (response) {
-      console.log(response);
-      // 功能未完善
-      router.push('home')
-    })
-    .catch(function (error) {
-      console.log(error);
-    });
+      .post("/api/user/login", UserForm)
+      .then(function (response) {
+        console.log(response);
+        // 功能未完善
+        router.push('home')
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
 
 
 };
@@ -82,8 +84,7 @@ const handleJumpRegister = () => {
 
 <style lang="scss" scoped>
 .login {
-    min-width: 280px;
-  background-color: antiquewhite;
+  min-width: 280px;
   padding: 32px;
 
   &__title {
@@ -93,9 +94,11 @@ const handleJumpRegister = () => {
     line-height: 100%;
     padding: 0 20px 20px;
   }
+
   &__tips {
     line-height: 100%;
     padding: 10px 0;
   }
 }
 </style>
+
