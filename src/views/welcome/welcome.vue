@@ -23,12 +23,14 @@ const login = () => {
 
 <style lang="scss" scoped>
 .welcome {
-  // 国外资源
-  //background-image: url("https://fastly.jsdelivr.net/gh/YuChaoM/images/OS/login.32c09ed0.jpg");
-  //国内资源
-  background-image: url("https://community-avatar.oss-cn-guangzhou.aliyuncs.com/header/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_202106210911152.jpg");
-  background-size: cover;
+  height: 100%;
+  font-weight: normal;
   overflow: hidden;
+  background-size: cover;
+  /* 国外资源*/
+  /*background-image: url("https://fastly.jsdelivr.net/gh/YuChaoM/images/OS/login.32c09ed0.jpg");*/
+  /*国内资源*/
+  background-image: url("https://community-avatar.oss-cn-guangzhou.aliyuncs.com/header/%E5%BE%AE%E4%BF%A1%E5%9B%BE%E7%89%87_202106210911152.jpg");
 
   &__title {
     font-size: -webkit-xxx-large;

@@ -8,11 +8,15 @@ import mainBar from "./components/mainBar.vue";
     <el-container class="home__container">
 
       <div class="home__aside-bar flex h-full">
-        <el-aside width="200px"><asideBar /></el-aside>
+        <el-aside width="200px">
+          <asideBar/>
+        </el-aside>
       </div>
 
       <div class="home__main-bar flex flex-1 w-full h-full">
-        <el-main><mainBar /></el-main>
+        <el-main>
+          <mainBar/>
+        </el-main>
       </div>
 
     </el-container>
@@ -22,7 +26,15 @@ import mainBar from "./components/mainBar.vue";
 
 <style lang="scss" scoped>
 
-.home__main-bar{
+.home {
+  height: 100%;
+  font-weight: normal;
+  overflow: hidden;
+  background-color: hsla(160, 100%, 37%, 0.2);
+  background-size: cover;
+}
+
+.home__main-bar {
   margin: auto;
 }
 

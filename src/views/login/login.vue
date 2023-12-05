@@ -16,6 +16,7 @@
               type="password"
               placeholder="密码"
               show-password
+              @keyup.enter="handleLogin"
           />
         </el-form-item>
 
@@ -46,7 +47,7 @@
 <script setup>
 import {ref, reactive} from "vue";
 import {useRouter} from "vue-router";
-import service from "@/utils/request.js";
+import service from "@/plugins/request.js";
 
 // 实现路由跳转
 const router = useRouter();
@@ -85,7 +86,9 @@ const handleJumpRegister = () => {
 <style lang="scss" scoped>
 .login {
   min-width: 280px;
-  padding: 32px;
+  background-color: rgba(255, 255, 255, 0.8); /* 白色透明背景 */
+  border-radius: 10px; /* 圆角半径，根据需要调整 */
+  padding: 20px;
 
   &__title {
     font-size: -webkit-xxx-large;
