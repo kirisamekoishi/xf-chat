@@ -6,11 +6,11 @@ import asideBar from "./layout/asideBar.vue";
 <template>
   <div class="home flex flex-1 w-full">
     <el-container class="home__container">
-      <el-aside width="200px" class="home__aside-bar h-full">
+      <el-aside width="200px" class="home__aside-bar">
         <asideBar />
       </el-aside>
 
-      <el-main class="home__main-bar flex-1 w-full h-full">
+      <el-main class="home__main-bar">
         <RouterView />
       </el-main>
     </el-container>
