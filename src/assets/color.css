@@ -1,0 +1,12 @@
+.dark {
+    --text-primary: var(--gray-100);
+    --text-secondary: var(--gray-300);
+    --text-tertiary: var(--gizmo-gray-500);
+    --surface-primary: var(--gray-900);
+    --surface-secondary: var(--gray-800);
+    --surface-tertiary: var(--gray-700);
+    --border-light: rgba(217,217,227,.1);
+    --border-medium: rgba(217,217,227,.15);
+    --border-heavy: rgba(217,217,227,.2);
+    --border-xheavy: rgba(217,217,227,.25);
+}

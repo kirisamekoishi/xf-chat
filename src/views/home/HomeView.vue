@@ -6,7 +6,7 @@ import asideBar from "./layout/asideBar.vue";
 <template>
   <div class="home flex flex-1 w-full">
     <el-container class="home__container">
-      <el-aside width="200px" class="home__aside-bar">
+      <el-aside width="280px" class="home__aside-bar">
         <asideBar />
       </el-aside>
 
