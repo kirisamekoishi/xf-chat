@@ -4,9 +4,9 @@ import asideBar from "./layout/asideBar.vue";
 </script>
 
 <template>
-  <div class="home flex flex-1 w-full">
+  <div class="home flex flex-1 w-full h-full">
     <el-container class="home__container">
-      <el-aside width="200px" class="home__aside-bar h-full">
+      <el-aside width="280px" class="home__aside-bar h-full w-full" >
         <asideBar />
       </el-aside>
 
@@ -19,14 +19,16 @@ import asideBar from "./layout/asideBar.vue";
 
 <style lang="scss" scoped>
 .home {
-  height: 100%;
-  font-weight: normal;
   overflow: hidden;
   background-color: hsla(160, 100%, 37%, 0.2);
   background-size: cover;
 
   &__aside-bar {
-    background-color: bisque;
+    padding-bottom: .875rem;
+    padding-left: .75rem;
+    padding-right: .75rem;
+    background-color: #999;
+    color: black;
   }
 
   &__main-bar {

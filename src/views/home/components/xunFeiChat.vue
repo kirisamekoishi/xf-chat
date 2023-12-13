@@ -1,19 +1,20 @@
+<!-- 基础界面 -->
 <template>
   <div class="xunfei-chat flex flex-col h-full items-center justify-center">
-    <div class="xunfei-chat__title flex flex-col h-full items-center justify-center">
-        How can I help you today?
+    <div
+      class="xunfei-chat__title flex flex-col h-full items-center justify-center"
+    >
+      How can I help you today?
     </div>
     <div class="xunfei-chat__form">
       <el-form>
         <div class="flex flex-1 flex-col el-form__div">
-          
-            <el-form-item>
-            <el-input v-model="usertext" type="textarea" />
+          <el-form-item>
+            <el-input v-model="newMessage" type="textarea" />
           </el-form-item>
 
           <el-form-item>
-            <el-button type="primary" @click="onSubmit">Create</el-button>
-            <el-button>Cancel</el-button>
+            <el-button type="primary" @click="sendMessage">Create</el-button>
           </el-form-item>
         </div>
       </el-form>
@@ -22,13 +23,14 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { useChatStore } from "@/stores/chat";
 
-const usertext = ref("");
-const onSubmit = () => {
-  console.log(usertext);
-  // 等待调用后端接口
+const chatStore = useChatStore();
 
+const newTitle = "";
+const newMessage = "";
+const sendMessage = () => {
+  chatStore.sendMessage(chatStore.currentSession.id, newMessage);
 };
 </script>
 
@@ -39,7 +41,7 @@ const onSubmit = () => {
 }
 
 .xunfei-chat {
-    &__title {
+  &__title {
     font-size: -webkit-xxx-large;
     font-weight: 600;
     color: #333;

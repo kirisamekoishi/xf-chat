@@ -99,6 +99,11 @@ body{
   max-width: 100%;
 }
 
+.max-h-full {
+  /* 设置最大宽度。 */
+  max-width: 100%;
+}
+
 .flex-col {
   /* 将元素设置为纵向排列。 */
   flex-direction: column;
@@ -124,8 +129,16 @@ body{
   align-items: stretch;
 }
 
+.items-end {
+  align-items: flex-end;
+}
+
 .justify-center {
   /* 将元素内的子元素在所在行（水平方向）上居中。 */
   justify-content: center;
 }
 
+.text-base {
+  font-size: 1rem;
+  line-height: 1.5rem;
+}

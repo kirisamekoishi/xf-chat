@@ -1,9 +1,10 @@
 import axios from 'axios';
-// import { Message, MessageBox } from 'element-ui';  // 你可能需要根据你的 UI 库进行修改
+// import { Message, MessageBox } from 'element-plus';  
 
 // 创建 axios 实例
 const service = axios.create({
   baseURL: "http://192.168.192.10:5000", // 请求的基础路径
+  // baseURL: "http://127.0.0.1:5000", // 请求的基础路径
   timeout: 10000,  // 请求超时时间
 });
 
