@@ -64,16 +64,24 @@ const loginFormRef = ref(null);
 const handleLogin = () => {
   service
       .post("/api/user/login", UserForm)
-      .then(function (response) {
-        console.log(response);
-        // 功能未完善
-        router.push('home')
+      .then(async function (response) {
+        const res =  response.data;
+
+        console.log(res);
+        // 根据后台返回的数据执行其他操作
+        if (res.code === 0) {
+          console.log("登陆成功")
+          console.log(res.message)
+          // 登录成功，执行跳转逻辑
+          router.push('/home');
+        } else {
+          // 登录失败，可以处理错误信息等
+          console.error('Login failed:', res.message);
+        }
       })
       .catch(function (error) {
-        console.log(error);
+        console.error('Error in login request:', error);
       });
-
-
 };
 
 // 跳转到注册页面 方法

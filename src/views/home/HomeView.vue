@@ -10,7 +10,7 @@ import asideBar from "./layout/asideBar.vue";
         <asideBar />
       </el-aside>
 
-      <el-main class="home__main-bar flex-1 w-full h-full">
+      <el-main class="home__main-bar">
         <RouterView />
       </el-main>
     </el-container>
