@@ -26,6 +26,7 @@ export const useUserStore = defineStore({
                 console.error('Error in getLoginUser:', error);
             }
         },
+
     },
     mutations: {
         setLoginUser(user) {
