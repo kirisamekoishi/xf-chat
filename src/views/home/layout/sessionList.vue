@@ -2,26 +2,27 @@
 <template>
   <el-scrollbar>
   <div class="session-list flex flex-col">
+    <el-scrollbar>
       <div
-        v-for="session in sessionsData"
-        :key="session.id"
-        @click="selectSession(session.id)"
-        class="session-list__item flex items-center overflow-hidden"
+          v-for="session in sessionsList"
+          :key="session.id"
+          @click="selectSession(session.id)"
+          class="session-list__item flex items-center justify-center"
       >
         {{ session.title }}
       </div>
-    </div>
-  </el-scrollbar>
+    </el-scrollbar>
+  </div>
 </template>
 
 <script setup>
-import { ref } from "vue";
-// import { useChatStore } from "@/stores/chat";
+import {ref, onBeforeMount, onMounted, reactive} from "vue";
+import {useChatStore} from "@/stores/chat";
 
-// const chatStore = useChatStore();
+const chatStore = useChatStore();
 
 // 使用pinia 获取用户下的所有会话（批量获取）
-// const sessions = chatStore.sessions;
+const sessions = chatStore.sessions;
 
 // 入参：
 // {
@@ -49,6 +50,13 @@ import { ref } from "vue";
 //     "message": "ok"
 // }
 // 模拟pinia 获取用户下的所有会话（批量获取）
+let sessionsList = ref([])
+// const form = reactive({pageNum:1,pageSize:10})
+const loadData = async () => {
+  await chatStore.fetchSessions(1, 10)
+  console.log('res', chatStore.sessions)
+  sessionsList.value = chatStore.sessions;
+}
 
 const sessionsData = ref([
   {
@@ -177,6 +185,7 @@ const sessionsData = ref([
 // };
 const selectSession = (sessionId) => {
   console.log("session 被点击", sessionId);
+
 };
 </script>
 
