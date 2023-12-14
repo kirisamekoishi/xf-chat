@@ -6,7 +6,7 @@ import asideBar from "./layout/asideBar.vue";
 <template>
   <div class="home flex flex-1 w-full h-full">
     <el-container class="home__container">
-      <el-aside width="280px" class="home__aside-bar h-full w-full" >
+      <el-aside width="280px" class="home__aside-bar h-full w-full dark" >
         <asideBar />
       </el-aside>
 
@@ -27,12 +27,13 @@ import asideBar from "./layout/asideBar.vue";
     padding-bottom: .875rem;
     padding-left: .75rem;
     padding-right: .75rem;
-    background-color: #999;
-    color: black;
+    background-color: black;
+    color: white;
   }
 
   &__main-bar {
-    background-color: dimgray;
+    background-color: white;
+    color: #000;
   }
 }
 </style>

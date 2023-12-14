@@ -1,17 +1,17 @@
 <!-- src/views/SessionList.vue -->
 <template>
+  <el-scrollbar>
   <div class="session-list flex flex-col">
-      <el-scrollbar>
       <div
         v-for="session in sessionsData"
         :key="session.id"
         @click="selectSession(session.id)"
-        class="session-list__item flex items-center justify-center"
+        class="session-list__item flex items-center overflow-hidden"
       >
         {{ session.title }}
       </div>
-    </el-scrollbar>
     </div>
+  </el-scrollbar>
 </template>
 
 <script setup>
@@ -73,13 +73,15 @@ const sessionsData = ref([
   {
     id: 4,
     userId: 1,
-    title: "巴赫 G弦上的咏叹调",
+    title:
+      "你说得对，但是这就是奎桑提，HP 4700，护甲 329，魔抗 201的英雄。有不可阻挡，有护盾，还能过墙。有控制，甚至冷却时间只有1秒，只要15点蓝。转换姿态时甚至可以刷新W的cd，还有真实伤害。然后，护甲和魔抗提升后还能获得技能加速，缩短Q的cd，还缩短释放时间，然后还有攻击力。W就啊啊啊啊啊啊!!!",
     createTime: "2023-11-27 16:40:44",
   },
   {
     id: 5,
     userId: 1,
-    title: "巴赫 G弦上的咏叹调",
+    title:
+      "你说得对，但是这就是奎桑提，HP 4700，护甲 329，魔抗 201的英雄。有不可阻挡，有护盾，还能过墙。有控制，甚至冷却时间只有1秒，只要15点蓝。转换姿态时甚至可以刷新W的cd，还有真实伤害。然后，护甲和魔抗提升后还能获得技能加速，缩短Q的cd，还缩短释放时间，然后还有攻击力。W就啊啊啊啊啊啊!!!",
     createTime: "2023-11-27 16:40:44",
   },
   {
@@ -184,6 +186,7 @@ const selectSession = (sessionId) => {
 
   &__item {
     padding: 0.5rem;
+    white-space: nowrap;
   }
 }
 </style>

@@ -11,15 +11,20 @@
         :key="message.id"
       >
         <!-- 包裹住头像与消息框的div -->
-        <div class="chat-window__container text-base">
+        <div class="chat-box text-base">
           <!-- 头像div -->
-          <div class="flex-shrink-0 flex flex-col relative items-end"></div>
+          <div class="chat-box__tou flex-shrink-0 flex flex-col relative items-end"></div>
           <!-- 消息框 -->
-          <div class="" style="width: calc(100% - 115px);">
+          <div class="chat-box__sub-box" style="width: calc(100% - 115px);">
             <!-- 昵称 -->
-            <div></div>
+            <div v-if="message.userId !== 0" class="chat-box__name">
+              YOU
+            </div>
+            <div v-else class="chat-box__name">
+              ChatGPT
+            </div>
             <!-- 消息内容 -->
-            <div>
+            <div class="chat-box__content">
               {{ message.content }}
             </div>
           </div>
@@ -90,7 +95,7 @@ import { ref } from "vue";
 const currentSessionMessages = ref([
   {
     id: 3,
-    userId: 1,
+    userId: 0,
     conversationId: 3,
     content:
       "你说得对，但是这就是奎桑提，HP 4700，护甲 329，魔抗 201的英雄。有不可阻挡，有护盾，还能过墙。有控制，甚至冷却时间只有1秒，只要15点蓝。转换姿态时甚至可以刷新W的cd，还有真实伤害。然后，护甲和魔抗提升后还能获得技能加速，缩短Q的cd，还缩短释放时间，然后还有攻击力。W就啊啊啊啊啊啊!!!",
@@ -143,5 +148,10 @@ const sendMessage = () => {
 
   &__form {
   }
+}
+
+.chat-box {
+
+
 }
 </style>
