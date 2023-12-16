@@ -30,12 +30,14 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
-// import { useChatStore } from "@/stores/chat";
+import { useChatStore } from "@/stores/chat.js";
+import "@/components/common-list.vue"
 
-// const chatStore = useChatStore();
+const chatStore = useChatStore();
 
 // // 使用pinia 获取用户下的所有会话（批量获取）
 // let sessionsList = chatStore.getSessionsList();
+const sessionsList = ref([])
 
 //第一次加载和加载更多不同,需要手动调用,初始化内容数组和数据总量
 onMounted(() => {
@@ -43,6 +45,8 @@ onMounted(() => {
 });
 //分页参数,当前页码
 const pageNum = ref(1);
+//分页显示条数
+const pageSize = ref(10)
 //请求是否完成
 const loading = ref(false);
 //是否有更多数据需要加载
@@ -56,16 +60,17 @@ const initData = async () => {
   // }
   loading.value = true;
   //请求后台接口
-  let resList = await fetchSessions(pageNum.value, 10);
+  let resList = await chatStore.fetchSessions(pageNum.value, pageSize.value);
   //后台反馈的数据放入变量中
-  sessionsList.value = resList.content;
+  sessionsList.value = resList;
   //设置数据总量
-  total.value = resList.totalSize;
+  // total.value = resList.totalSize;
   loading.value = false;
 };
 watch(sessionsList, () => {
   //判断是否有更多数据需要加载,如果接口没有返回数据,或者返回的数据大于等于总数则没有更多数据需要加载
-  if (!sessionsList.value || total.value <= sessionsList.value.length) {
+  // if (!sessionsList.value || total.value <= sessionsList.value.length) {
+  if (!sessionsList.value) {
     noMore.value = true;
   }
 });
@@ -73,10 +78,10 @@ watch(sessionsList, () => {
 const loadMore = async () => {
   pageNum.value++;
   loading.value = true;
-  let resList = await getXXXList(params);
+  let resList = await chatStore.fetchSessions(pageNum.value, pageSize.value);
   //加载更多数据,和初始化数据不同,需要对数据进行追加,而不是直接覆盖
-  sessionsList.value = sessionsList.value.concat(resList.ontent);
-  total.value = resList.totalSize;
+  sessionsList.value = sessionsList.value.concat(resList);
+  // total.value = resList.totalSize;
   loading.value = false;
 };
 
@@ -203,9 +208,9 @@ const loadMore = async () => {
 //   chatStore.fetchSessionMessages(sessionId);
 //   // 还可以进行其他处理，比如更新当前会话的标题等
 // };
-const selectSession = (sessionId) => {
-  console.log("session 被点击", sessionId);
-};
+// const selectSession = (sessionId) => {
+//   console.log("session 被点击", sessionId);
+// };
 </script>
 
 <style lang="scss" scoped>

@@ -66,7 +66,7 @@ const handleLogin = () => {
       .post("/api/user/login", UserForm)
       .then((response) => {
         console.log('response', response)
-        const res =  response.data;
+        const res =  response;
 
         console.log(res);
         // 根据后台返回的数据执行其他操作
