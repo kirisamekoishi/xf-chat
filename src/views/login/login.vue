@@ -54,8 +54,8 @@ const router = useRouter();
 
 // 登录表单
 const UserForm = reactive({
-  userAccount: "",
-  userPassword: "",
+  userAccount: "admin",
+  userPassword: "123456",
 });
 // 登录表单实例
 const loginFormRef = ref(null);
@@ -64,13 +64,15 @@ const loginFormRef = ref(null);
 const handleLogin = () => {
   service
       .post("/api/user/login", UserForm)
-      .then(async function (response) {
+      .then((response) => {
+        console.log('response', response)
         const res =  response.data;
 
         console.log(res);
         // 根据后台返回的数据执行其他操作
         if (res.code === 0) {
           console.log("登陆成功")
+          console.log(document.cookie)
           console.log(res.message)
           // 登录成功，执行跳转逻辑
           router.push('/home');
