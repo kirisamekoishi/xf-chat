@@ -10,20 +10,20 @@ export const fetchSessionListApi = (pageNum, pageSize) => {
   });
 };
 
-// // 获取用户会话内的消息记录(分页显示)
-// export const fetchSessionMessagesListApi = (
-//   conversationId,
-//   pageNum,
-//   pageSize
-// ) => {
-//   return service.get("/conversation/get/page", {
-//     params: {
-//       conversationId, // 这个是会话的id
-//       pageNum,
-//       pageSize,
-//     },
-//   });
-// };
+// 获取用户会话内的消息记录(分页显示)
+export const fetchSessionMessagesListApi = (
+  conversationId,
+  pageNum,
+  pageSize
+) => {
+  return service.get("/api/message/get/page", {
+    params: {
+      conversationId, // 这个是会话的id
+      pageNum,
+      pageSize,
+    },
+  });
+};
 
 // 新建会话
 export const addSessionApi = (title) => {
@@ -42,10 +42,10 @@ export const deleteSessionApi = (id) => {
 
 // 发送消息
 export const sendMessageApi = (conversationId, content) => {
-  return service.get("/conversation/get/page", {
-    params: {
-      conversationId, // 会话的id
-      content,
-    },
+  console.log('conversationId',conversationId);
+  console.log('content',content);
+  return service.post("/api/message/send", {
+    conversationId, // 会话的id
+    content,
   });
 };

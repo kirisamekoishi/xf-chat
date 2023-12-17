@@ -80,7 +80,7 @@ const handleJumpLogin = () => {
 // 请求注册
 const handleRegister = () => {
   service
-    .post("/api/user/register", requestData)
+    .post("/api/user/register", UserForm)
     .then(function (response) {
       console.log(response);
     })
