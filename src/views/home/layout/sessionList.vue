@@ -1,7 +1,6 @@
 <!-- src/views/SessionList.vue -->
 <template>
-  <div class="session-list flex flex-col">
-    <!-- <el-scrollbar>
+  <!-- <el-scrollbar>
       <div
           v-for="session in sessionsList"
           :key="session.id"
@@ -45,16 +44,62 @@
         </view>
       </common-list>
     </el-scrollbar> -->
-    <ul v-infinite-scroll="loadMore" class="infinite-list" style="overflow: auto">
-      <li v-for="(item, index) of sessionsList" :key="index" class="infinite-list-item">{{ item.title }}</li>
-    </ul>
-  </div>
+  <ul
+    v-infinite-scroll="loadMore"
+    class="session-list flex flex-col"
+    style="overflow: auto"
+  >
+    <li
+      v-for="(item, index) of sessionsList"
+      :key="index"
+      class="session-list__item flex items-center justify-center"
+    >
+      <div class="flex flex-1 items-center overflow-hidden">
+        {{ item.title }}
+      </div>
+      <div class="flex items-center justify-end">
+        <el-button
+          class="session-list__btn"
+          :dark="true"
+          :circle="true"
+          :icon="Edit"
+          @click="editHandler(index)"
+        />
+        <el-button
+          class="session-list__btn"
+          :dark="true"
+          :circle="true"
+          :icon="Delete"
+          @click="deleteHandler(index)"
+        />
+      </div>
+    </li>
+  </ul>
+
+  <!-- 弹出框 -->
+  <el-dialog v-model="dialogVisible" title="更新标题">
+    <el-form :model="form">
+      <el-form-item label="会话标题">
+        <el-input
+          v-model="form.title"
+          autocomplete="off"
+          placeholder="请输入新的标题"
+        />
+      </el-form-item>
+    </el-form>
+    <template #footer>
+      <span class="dialog-footer">
+        <el-button @click="closeDialog">取消</el-button>
+        <el-button type="primary" @click="editHandler"> 确认 </el-button>
+      </span>
+    </template>
+  </el-dialog>
 </template>
 
 <script setup>
-import {ref, onMounted, defineComponent, onUnmounted, watch} from "vue";
-import {useChatStore} from "@/stores/chat.js";
-import "@/components/common-list.vue"
+import { ref, onMounted, defineComponent, onUnmounted, watch } from "vue";
+import { useChatStore } from "@/stores/chat.js";
+import { Delete, Edit } from "@element-plus/icons-vue";
 
 const chatStore = useChatStore();
 
@@ -62,41 +107,52 @@ const sessionsList = ref([]);
 //分页参数,当前页码
 const pageNum = ref(0);
 //分页显示条数
-const pageSize = ref(25)
+const pageSize = ref(5);
 
+// 更新标题
+const newTitle = ref("");
+const dialogVisible = ref(false)
 
-//初始化函数,也可以用于刷新
-// const initData = async () => {
-//   pageNum.value = 1;
-//   listLoading.value = true;
-//   //请求后台接口
-//   let resList = await chatStore.fetchSessions(pageNum.value, pageSize.value);
-//   //后台反馈的数据放入变量中
-//   sessionsList.value = resList;
-//   console.log(resList)
-//   //设置数据总量
-//   // total.value = resList.totalSize;
-//   listLoading.value = false;
-// };
+const closeDialog = () => {
+  newTitle.value = ""
+}
+
 
 const loadMore = async () => {
-  console.log("加载跟多数据")
+  console.log("加载跟多数据");
+
   pageNum.value++;
-  console.log(" pageNum.value", pageNum.value)
+
+  console.log("pageNum.value", pageNum.value);
+
   let resList = await chatStore.fetchSessions(pageNum.value, pageSize.value);
   //加载更多数据,和初始化数据不同,需要对数据进行追加,而不是直接覆盖
   sessionsList.value = sessionsList.value.concat(resList);
   // total.value = resList.totalSize;
 };
 
-// 编辑按钮
-const editHandler = async () => {
+// 更新会话标题
+const editHandler = async (index,newTitle) => {
+  dialogVisible.value = true
+  if (await chatStore.deleteSession(index,newTitle)) {
+    ElMessage({
+      message: "更新成功",
+      type: "success",
+    });
+    dialogVisible.value = false
+  }
 };
 
+
 // 删除按钮
-const deleteHandler = () => {};
-
-
+const deleteHandler = async (index) => {
+  if (await chatStore.deleteSession(index)) {
+    ElMessage({
+      message: "删除成功",
+      type: "success",
+    });
+  }
+};
 
 // 查询会话id
 // const selectSession = (sessionId) => {
@@ -111,6 +167,7 @@ const deleteHandler = () => {};
 <style lang="scss" scoped>
 .session-list {
   overflow: auto;
+  padding: 0%;
 
   &__item {
     padding: 0.5rem;
@@ -125,26 +182,5 @@ const deleteHandler = () => {};
   &__btn {
     background-color: #999999;
   }
-}
-
-.infinite-list {
-  height: 300px;
-  padding: 0;
-  margin: 0;
-  list-style: none;
-}
-
-.infinite-list .infinite-list-item {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  height: 50px;
-  background: var(--el-color-primary-light-9);
-  margin: 10px;
-  color: var(--el-color-primary);
-}
-
-.infinite-list .infinite-list-item + .list-item {
-  margin-top: 10px;
 }
 </style>
