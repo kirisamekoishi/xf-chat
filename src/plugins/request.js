@@ -2,8 +2,7 @@ import axios from 'axios';
 
 // 创建 axios 实例
 const service = axios.create({
-  // baseURL: "http://192.168.192.10:5000", // 请求的基础路径
-  baseURL: "http://127.0.0.1:5000", // 请求的基础路径
+  baseURL: "http://192.168.192.20:5000", // 请求的基础路径
   timeout: 10000,  // 请求超时时间
   withCredentials: true, // 允许携带凭据（例如 Cookie）
 });

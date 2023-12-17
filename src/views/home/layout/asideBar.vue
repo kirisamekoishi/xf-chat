@@ -20,8 +20,6 @@ import userAccount from "./userAccount.vue";
 
 <style lang="scss" scoped>
 .aside-bar {
-  padding-right: 0.5rem;
-
   &__session-list {
     height: calc(100% - 115px);
   }

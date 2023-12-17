@@ -1,5 +1,5 @@
 import { defineStore } from "pinia";
-import { fetchSessionListApi } from "../common/sessionApi.js";
+import { fetchSessionListApi, addSessionApi, deleteSessionApi } from "../common/sessionApi.js";
 
 export const useChatStore = defineStore("chat", {
   state: () => ({
@@ -49,17 +49,18 @@ export const useChatStore = defineStore("chat", {
     //     console.error("Error in fetchSessionMessagesList:", error);
     //   }
     // },
-    // // 新建会话
-    // async addSession(title) {
-    //   try {
-    //     const res = await addSessionApi(title);
-    //     if (res.code === 0) {
-    //       this.messagesList = res.data;
-    //     }
-    //   } catch (error) {
-    //     console.error("Error in addSession:", error);
-    //   }
-    // },
+
+    // 新建会话
+    async addSession(title) {
+      try {
+        const res = await addSessionApi(title);
+        if (res.code === 0) {
+          return true
+        }
+      } catch (error) {
+        console.error("Error in addSession:", error);
+      }
+    },
     // // 更新会话标题
     // async updateSessionTitle(sessionId, newTitle) {
     //   try {
@@ -71,17 +72,17 @@ export const useChatStore = defineStore("chat", {
     //     console.error("Error in updateSessionTitle:", error);
     //   }
     // },
-    // // 删除会话
-    // async deleteSession(sessionId) {
-    //   try {
-    //     const res = await deleteSessionApi(sessionId);
-    //     if (res.code === 0) {
-    //       this.messagesList = res.data;
-    //     }
-    //   } catch (error) {
-    //     console.error("Error in deleteSession:", error);
-    //   }
-    // },
+    // 删除会话
+    async deleteSession(sessionId) {
+      try {
+        const res = await deleteSessionApi(sessionId);
+        if (res.code === 0) {
+          return true
+        }
+      } catch (error) {
+        console.error("Error in deleteSession:", error);
+      }
+    },
     // // 发送消息
     // async sendMessage(conversationId, content) {
     //   try {

@@ -50,48 +50,11 @@
 
 <script setup>
 import { ref } from "vue";
-// import { useChatStore } from "@/stores/chat.js";
+import { useChatStore } from "@/stores/chat.js";
 
-// const chatStore = useChatStore();
+const chatStore = useChatStore();
 
-// 使用pinia 获取某个用户的某个会话所有信息（分页查询）
-// const currentSessionMessages = chatStore.getCurrentSessionMessages;
 
-// 模拟pinia 获取某个用户的某个会话所有信息（分页查询）
-// 入参：
-// {
-//   "conversationId": 7,
-//   "pageNum": 1，
-//   "pageSize": 10
-// }
-// 响应：
-// {
-//     "code": 0,
-//     "data": [
-//         {
-//             "id": 3,
-//             "userId": 1,
-//             "conversationId": 3,
-//             "content": "hello world",
-//             "createTime": "2023-11-27 16:43:52"
-//         },
-//         {
-//             "id": 2,
-//             "userId": 1,
-//             "conversationId": 3,
-//             "content": "hello world",
-//             "createTime": "2023-11-27 16:43:35"
-//         },
-//         {
-//             "id": 1,
-//             "userId": 1,
-//             "conversationId": 3,
-//             "content": "hello world",
-//             "createTime": "2023-11-27 16:43:17"
-//         }
-//     ],
-//     "message": "ok"
-// }
 const currentSessionMessages = ref([
   {
     id: 3,
@@ -121,14 +84,14 @@ const currentSessionMessages = ref([
 const newMessage = ref("");
 
 // 使用pinia 发送消息
-// const sendMessage = () => {
-//   chatStore.sendMessage(chatStore.currentSession.id, newMessage);
-// };
+const sendMessage = async () => {
+  chatStore.sendMessage(chatStore.currentSession.id, newMessage);
+};
 
 // 模拟pinia 发送消息
-const sendMessage = () => {
-  console.log(newMessage);
-};
+// const sendMessage = () => {
+//   console.log(newMessage);
+// };
 </script>
 
 <style lang="scss" scoped>

@@ -17,10 +17,30 @@
         @loadMore="loadMore"
       >
         <view class="contentBoxClass" ref="contentBox">
-          <view class="card" v-for="(item, index) of sessionsList" :key="index">
-            <!-- //  unit-item是自定义的组件内容,用于根据需要实现不同的自定义内容
-          //  <unit-item :unit-info="item" :index="index" @handleMaintenance="handleMaintenance"/> -->
-            {{ item.title }}
+          <view
+            class="session-list__item flex items-center"
+            v-for="(item, index) of sessionsList"
+            :key="index"
+          >
+            <div class="flex flex-1 items-center overflow-hidden">
+              {{ item.title }}
+            </div>
+            <div class="flex items-center justify-end">
+              <el-button
+                class="session-list__btn"
+                :dark="true"
+                :circle="true"
+                :icon="Edit"
+                @click="editHandler"
+              />
+              <el-button
+                class="session-list__btn"
+                :dark="true"
+                :circle="true"
+                :icon="Delete"
+                @click="deleteHandler"
+              />
+            </div>
           </view>
         </view>
       </common-list>
@@ -31,13 +51,14 @@
 <script setup>
 import { ref, onMounted } from "vue";
 import { useChatStore } from "@/stores/chat.js";
-import "@/components/common-list.vue"
+import { Delete, Edit } from "@element-plus/icons-vue";
+import "@/components/common-list.vue";
 
 const chatStore = useChatStore();
 
 // // 使用pinia 获取用户下的所有会话（批量获取）
 // let sessionsList = chatStore.getSessionsList();
-const sessionsList = ref([])
+const sessionsList = ref([]);
 
 //第一次加载和加载更多不同,需要手动调用,初始化内容数组和数据总量
 onMounted(() => {
@@ -46,7 +67,7 @@ onMounted(() => {
 //分页参数,当前页码
 const pageNum = ref(1);
 //分页显示条数
-const pageSize = ref(10)
+const pageSize = ref(10);
 //请求是否完成
 const loading = ref(false);
 //是否有更多数据需要加载
@@ -85,123 +106,17 @@ const loadMore = async () => {
   loading.value = false;
 };
 
-// const sessionsData = ref([
-//   {
-//     id: 1,
-//     userId: 1,
-//     title: "你是猪",
-//     createTime: "2023-11-27 16:40:26",
-//   },
-//   {
-//     id: 2,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 3,
-//     userId: 1,
-//     title:
-//       "你说得对，但是这就是奎桑提，HP 4700，护甲 329，魔抗 201的英雄。有不可阻挡，有护盾，还能过墙。有控制，甚至冷却时间只有1秒，只要15点蓝。转换姿态时甚至可以刷新W的cd，还有真实伤害。然后，护甲和魔抗提升后还能获得技能加速，缩短Q的cd，还缩短释放时间，然后还有攻击力。W就啊啊啊啊啊啊!!!",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 4,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 5,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 6,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 7,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 8,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 9,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 10,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 10,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 10,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 10,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 10,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 10,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 10,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 10,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 10,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-//   {
-//     id: 10,
-//     userId: 1,
-//     title: "巴赫 G弦上的咏叹调",
-//     createTime: "2023-11-27 16:40:44",
-//   },
-// ]);
+// 编辑按钮
+const editHandler = async () => {
+  if (await chatStore.addSession(form)) {
+
+  }
+};
+
+// 删除按钮
+const deleteHandler = () => {};
+
+
 
 // 查询会话id
 // const selectSession = (sessionId) => {
@@ -220,6 +135,15 @@ const loadMore = async () => {
   &__item {
     padding: 0.5rem;
     white-space: nowrap;
+  }
+  &__item:hover {
+    padding: 0.5rem;
+    white-space: nowrap;
+    background-color: #666666;
+  }
+
+  &__btn {
+    background-color: #999999;
   }
 }
 </style>
