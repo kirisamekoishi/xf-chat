@@ -12,10 +12,10 @@ service.interceptors.request.use(
   (config) => {
     console.log('url', config.url)
     // 在发送请求之前做些什么
-    if (config.url !== '/api/user/get/loginUser') {
+    // if (config.url !== '/api/user/get/loginUser') {
       // 如果有 token，添加到请求头中
       // config.headers['Set-Cookie'] = 'eyJ1c2VyQWNjb3VudCI6ImFkbWluIn0.ZXrWXQ.qxoq4dN8FJH0UMReuUdlY8Ru_3M';
-    }
+    // }
     return config;
   },
   (error) => {

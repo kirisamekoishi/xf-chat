@@ -1,15 +1,15 @@
 <!-- src/views/SessionList.vue -->
 <template>
   <div class="session-list flex flex-col">
-    <el-scrollbar>
-      <!-- <div
+    <!-- <el-scrollbar>
+      <div
           v-for="session in sessionsList"
           :key="session.id"
           @click="selectSession(session.id)"
           class="session-list__item flex items-center justify-center"
       >
         {{ session.title }}
-      </div> -->
+      </div>
       <common-list
         :loading="loading"
         :no-more="noMore"
@@ -44,73 +44,53 @@
           </view>
         </view>
       </common-list>
-    </el-scrollbar>
+    </el-scrollbar> -->
+    <ul v-infinite-scroll="loadMore" class="infinite-list" style="overflow: auto">
+      <li v-for="(item, index) of sessionsList" :key="index" class="infinite-list-item">{{ item.title }}</li>
+    </ul>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import { useChatStore } from "@/stores/chat.js";
-import { Delete, Edit } from "@element-plus/icons-vue";
-import "@/components/common-list.vue";
+import {ref, onMounted, defineComponent, onUnmounted, watch} from "vue";
+import {useChatStore} from "@/stores/chat.js";
+import "@/components/common-list.vue"
 
 const chatStore = useChatStore();
 
-// // 使用pinia 获取用户下的所有会话（批量获取）
-// let sessionsList = chatStore.getSessionsList();
 const sessionsList = ref([]);
-
-//第一次加载和加载更多不同,需要手动调用,初始化内容数组和数据总量
-onMounted(() => {
-  initData();
-});
 //分页参数,当前页码
-const pageNum = ref(1);
+const pageNum = ref(0);
 //分页显示条数
-const pageSize = ref(10);
-//请求是否完成
-const loading = ref(false);
-//是否有更多数据需要加载
-const noMore = ref(false);
-//初始化函数,也可以用于刷新
-const initData = async () => {
-  pageNum.value = 1;
-  //根据需要传递给后台的参数
-  // let params = {
+const pageSize = ref(25)
 
-  // }
-  loading.value = true;
-  //请求后台接口
-  let resList = await chatStore.fetchSessions(pageNum.value, pageSize.value);
-  //后台反馈的数据放入变量中
-  sessionsList.value = resList;
-  //设置数据总量
-  // total.value = resList.totalSize;
-  loading.value = false;
-};
-watch(sessionsList, () => {
-  //判断是否有更多数据需要加载,如果接口没有返回数据,或者返回的数据大于等于总数则没有更多数据需要加载
-  // if (!sessionsList.value || total.value <= sessionsList.value.length) {
-  if (!sessionsList.value) {
-    noMore.value = true;
-  }
-});
+
+//初始化函数,也可以用于刷新
+// const initData = async () => {
+//   pageNum.value = 1;
+//   listLoading.value = true;
+//   //请求后台接口
+//   let resList = await chatStore.fetchSessions(pageNum.value, pageSize.value);
+//   //后台反馈的数据放入变量中
+//   sessionsList.value = resList;
+//   console.log(resList)
+//   //设置数据总量
+//   // total.value = resList.totalSize;
+//   listLoading.value = false;
+// };
 
 const loadMore = async () => {
+  console.log("加载跟多数据")
   pageNum.value++;
-  loading.value = true;
+  console.log(" pageNum.value", pageNum.value)
   let resList = await chatStore.fetchSessions(pageNum.value, pageSize.value);
   //加载更多数据,和初始化数据不同,需要对数据进行追加,而不是直接覆盖
   sessionsList.value = sessionsList.value.concat(resList);
   // total.value = resList.totalSize;
-  loading.value = false;
 };
 
 // 编辑按钮
 const editHandler = async () => {
-  if (await chatStore.addSession(form)) {
-
-  }
 };
 
 // 删除按钮
@@ -145,5 +125,26 @@ const deleteHandler = () => {};
   &__btn {
     background-color: #999999;
   }
+}
+
+.infinite-list {
+  height: 300px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.infinite-list .infinite-list-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 50px;
+  background: var(--el-color-primary-light-9);
+  margin: 10px;
+  color: var(--el-color-primary);
+}
+
+.infinite-list .infinite-list-item + .list-item {
+  margin-top: 10px;
 }
 </style>
