@@ -2,8 +2,8 @@ import axios from 'axios';
 
 // 创建 axios 实例
 const service = axios.create({
-  // baseURL: "http://192.168.192.10:5000", // 请求的基础路径
-  baseURL: "http://127.0.0.1:5000", // 请求的基础路径
+  baseURL: "http://192.168.192.10:5000", // 请求的基础路径
+  // baseURL: "http://127.0.0.1:5000", // 请求的基础路径
   timeout: 10000,  // 请求超时时间
   withCredentials: true, // 允许携带凭据（例如 Cookie）
 });
@@ -13,10 +13,10 @@ service.interceptors.request.use(
   (config) => {
     console.log('url', config.url)
     // 在发送请求之前做些什么
-    if (config.url !== '/api/user/get/loginUser') {
+    // if (config.url !== '/api/user/get/loginUser') {
       // 如果有 token，添加到请求头中
       // config.headers['Set-Cookie'] = 'eyJ1c2VyQWNjb3VudCI6ImFkbWluIn0.ZXrWXQ.qxoq4dN8FJH0UMReuUdlY8Ru_3M';
-    }
+    // }
     return config;
   },
   (error) => {

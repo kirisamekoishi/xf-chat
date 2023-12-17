@@ -2,7 +2,7 @@ import service from "@/plugins/request.js";
 
 // 获取用户会话记录(分页显示)
 export const fetchSessionListApi = (pageNum, pageSize) => {
-  return service.get("/conversation/get/page", {
+  return service.get("/api/conversation/get/page", {
     params: {
       pageNum: pageNum,
       pageSize: pageSize,
