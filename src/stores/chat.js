@@ -51,6 +51,7 @@ export const useChatStore = defineStore("chat", {
           pageSize
         );
         if (res.code === 0) {
+          console.log(res.data);
           return res.data;
         }
       } catch (error) {

@@ -7,8 +7,8 @@
       v-infinite-scroll="loadMore"
       class="chat-window__container flex flex-col flex-1 items-center overflow-auto"
     >
-      <el-scrollbar>
-        <!-- 被遍历出来的每一条数据的div -->
+    <!-- 被遍历出来的每一条数据的div -->
+    <el-scrollbar class="w-full">
         <li
           class="chat-window__item overflow-hidden"
           v-for="message in messageList"
@@ -31,9 +31,10 @@
               </div>
               <div v-else class="chat-box__name">ChatGPT</div>
               <!-- 消息内容 -->
-              <div class="chat-box__content">
-                {{ message.content }}
-              </div>
+              <div
+                class="chat-box__content flex flex-col"
+                v-html="message.renderedText"
+              ></div>
             </div>
           </div>
         </li>
@@ -73,6 +74,7 @@
 import { ref } from "vue";
 import { useRoute } from "vue-router";
 import { useChatStore } from "@/stores/chat.js";
+import { processText } from "@/plugins/markdownHelper.js";
 
 const route = useRoute();
 const chatStore = useChatStore();
@@ -113,8 +115,15 @@ const loadMore = async () => {
     pageNum.value,
     pageSize.value
   );
-
-  messageList.value = messageList.value.concat(resList);
+  console.log("resList", resList);
+  let processedData = resList.map((item) => {
+    const processedItem = processText(item.content);
+    // 保留其他属性
+    return { ...item, ...processedItem };
+  });
+  console.log("processedData", processedData);
+  messageList.value = messageList.value.concat(processedData);
+  console.log("messageList.value", messageList.value);
 };
 </script>
 
@@ -124,6 +133,14 @@ const loadMore = async () => {
     max-height: calc(100% - 115px);
     margin: 20px 40px;
     padding: 0%;
+    :deep(.markdown-content) {
+      background-color: black;
+      color: white;
+      white-space: pre-wrap; // 保留换行和空格
+      font-family: monospace; // 使用等宽字体
+      margin-bottom: 10px; // 适当调整下边距
+      /* 其他样式属性 */
+    }
   }
   &__box {
     font-size: 0.875rem;
@@ -142,6 +159,11 @@ const loadMore = async () => {
   &__form {
   }
 }
+.chat-box {
+  &__content {
+  }
+}
+
 .chat-form {
   &__input {
     font-size: 20px;
@@ -152,6 +174,4 @@ const loadMore = async () => {
   }
 }
 
-.chat-box {
-}
 </style>
