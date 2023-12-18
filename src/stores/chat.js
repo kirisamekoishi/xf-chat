@@ -10,24 +10,8 @@ import {
 
 export const useChatStore = defineStore("chat", {
   state: () => ({
-    sessionsList: [], // 全部会话
-    newSessionsList: [], // 某个用户里的某一页的会话
     messagesList: [], // 全部消息
-    newMessagesList: [], // 某个会话里的某一页消息
   }),
-  getters: {
-    // // 下拉刷新得到更新后的会话列表数据
-    // getSessionsList() {
-    //   // 在这里对 sessionsList 进行进一步的处理和计算
-    //   this.sessionsList.push(...this.newSessionsList);
-    //   this.newSessionsList.splice(0, this.newSessionsList.length);
-    //   return this.sessionsList;
-    // },
-    // // 下拉刷新得到更新后的消息列表数据
-    // getSessionMessagesList() {
-    //   return this.messagesList;
-    // },
-  },
   actions: {
     // 获取用户会话记录(分页显示)
     async fetchSessions(pageNum, pageSize) {

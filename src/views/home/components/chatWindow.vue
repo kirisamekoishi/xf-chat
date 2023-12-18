@@ -21,7 +21,8 @@
               class="chat-box__tou flex-shrink-0 flex flex-col relative items-end"
             ></div>
             <!-- 消息框 -->
-            <div class="chat-box__sub-box">
+            <div class="chat-box__sub-box flex flex-col">
+              
               <!-- 昵称 -->
               <div
                 v-if="message.userId !== 0 && message.userId !== undefined"
@@ -35,6 +36,7 @@
                 class="chat-box__content flex flex-col"
                 v-html="message.renderedText"
               ></div>
+              <el-divider />
             </div>
           </div>
         </li>

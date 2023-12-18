@@ -42,8 +42,6 @@ export const deleteSessionApi = (id) => {
 
 // 发送消息
 export const sendMessageApi = (conversationId, content) => {
-  console.log('conversationId',conversationId);
-  console.log('content',content);
   return service.post("/api/message/send", {
     conversationId, // 会话的id
     content,

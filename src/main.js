@@ -1,5 +1,5 @@
 import './assets/main.css'
-
+import '@/assets/fonts/iconfont.css'
 import { createApp } from 'vue'
 
 // 引入pinia状态管理
