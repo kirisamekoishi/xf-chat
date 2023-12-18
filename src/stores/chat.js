@@ -96,7 +96,7 @@ export const useChatStore = defineStore("chat", {
       try {
         const res = await sendMessageApi(conversationId, content);
         if (res.code === 0) {
-          return true;
+          return res;
         }
       } catch (error) {
         console.error("Error in sendMessage:", error);
