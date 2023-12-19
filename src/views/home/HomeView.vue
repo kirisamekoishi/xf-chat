@@ -10,7 +10,7 @@ import asideBar from "./layout/asideBar.vue";
         <asideBar />
       </el-aside>
 
-      <el-main class="home__main-bar">
+      <el-main class="home__main-bar items-center">
         <RouterView />
       </el-main>
     </el-container>
@@ -32,8 +32,9 @@ import asideBar from "./layout/asideBar.vue";
   }
 
   &__main-bar {
-    background-color: white;
-    color: #000;
+    background-color: #40414f;
+;
+    color: #ececf1;
   }
 }
 </style>

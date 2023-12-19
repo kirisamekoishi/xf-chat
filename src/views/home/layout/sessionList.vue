@@ -5,7 +5,7 @@
   </div>
   <ul
       v-infinite-scroll="loadMore"
-      class="session-list flex flex-col overflow-auto"
+      class="session-list flex flex-col overflow-auto w-full"
   >
     <el-scrollbar>
       <li
@@ -14,7 +14,7 @@
           class="session-list__item flex items-center justify-center infinite-list-item"
           @click="toSessionMessageList(item.id)"
       >
-        <div class="flex flex-1 items-center overflow-hidden">
+        <div class="session-list__title flex flex-1 items-center overflow-hidden">
           {{ item.title }}
         </div>
         <div class="flex items-center justify-end">
@@ -165,9 +165,13 @@ const deleteHandler = async (conversationId) => {
 .session-list {
   overflow: auto;
   padding: 0%;
+  :deep(.el-button) {
+    margin: 0%;
+  }
 
   &__item {
     padding: 0.5rem;
+    
     white-space: nowrap;
   }
 
@@ -176,27 +180,16 @@ const deleteHandler = async (conversationId) => {
     white-space: nowrap;
     background-color: #666666;
   }
+  &__title {
+    margin-right: 0.5rem;
+  }
 
   &__btn {
     background-color: #999999;
   }
 }
 
-//.infinite-list {
-//  padding: 0;
-//  margin: 0;
-//  list-style: none;
-//}
-//.infinite-list .infinite-list-item {
-//  display: flex;
-//  align-items: center;
-//  justify-content: center;
-//  height: 50px;
-//  margin: 10px;
-//}
-//.infinite-list .infinite-list-item + .list-item {
-//  margin-top: 10px;
-//}
+
 
 
 </style>

@@ -30,7 +30,7 @@
               >
                 YOU
               </div>
-              <div v-else class="chat-box__name">ChatGPT</div>
+              <div v-else class="chat-box__name">讯飞认知大模型</div>
               <!-- 消息内容 -->
               <div
                   class="chat-box__content flex flex-col"
@@ -48,11 +48,13 @@
       <el-form>
         <div class="flex flex-1 flex-col chat-form">
           <el-form-item>
-            <div class="flex flex-1 w-full items-center">
+            <div class="flex flex-1 items-center">
               <el-input
                   v-model="newMessage"
                   type="textarea"
-                  class="form__input"
+                  :autosize="{ minRows: 2, maxRows: 4 }"
+                  class="chat-form__input"
+                  placeholder="请输入你的消息"
               ></el-input>
 
               <div style="padding: 0.875rem">
@@ -74,12 +76,24 @@
 </template>
 
 <script setup>
-import {ref} from "vue";
-import {useRoute} from "vue-router";
+import {ref, onBeforeUnmount, onMounted, onUnmounted} from "vue";
+import {useRoute, useRouter} from "vue-router";
 import {useChatStore} from "@/stores/chat.js";
 import {processText} from "@/plugins/markdownHelper.js";
 import {sendMessageApi} from "../../../common/sessionApi";
 
+onMounted(() => {
+  const handleRouteChange = () => {
+    // 强制刷新页面
+    window.location.reload();
+  };
+  const router = useRouter()
+  router.afterEach(handleRouteChange)
+
+  onUnmounted(() => {
+    router.afterEach(null);
+  });
+})
 
 const route = useRoute();
 const chatStore = useChatStore();
@@ -201,7 +215,8 @@ const loadData = async () => {
 .chat-window {
   &__container {
     max-height: calc(100% - 115px);
-    margin: 20px 40px;
+    width: 780px;
+    margin: 20px auto;
     padding: 0%;
 
     :deep(.markdown-content) {
@@ -225,27 +240,40 @@ const loadData = async () => {
     padding-top: 0.5rem;
     padding-left: 1rem;
     padding-right: 1rem;
-    background-color: #ececec;
   }
 
   &__form {
+    width: 780px;
+    margin: 20px auto;
+
+    
   }
 }
 
 .chat-box {
   &__content {
+    :deep(p){
+      margin: 0.75rem 0;
+    }
+  }
+  &__name {
+    font-size: larger;
+    font-weight: bolder;
+    margin-bottom: 10px;
   }
 }
 
 .chat-form {
   &__input {
-    font-size: 20px;
+    font-size: 18px;
   }
 
   :deep(.el-textarea__inner) {
-    font-size: 20px;
+    font-size: 18px;
     line-height: 1.5rem;
+    overflow-y: hidden;
   }
+
 }
 
 </style>
