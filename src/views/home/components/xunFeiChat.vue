@@ -44,7 +44,7 @@ const sendMessage = () => {
   &__title {
     font-size: -webkit-xxx-large;
     font-weight: 600;
-    color: #333;
+    color: white;
     margin: auto;
   }
 }
