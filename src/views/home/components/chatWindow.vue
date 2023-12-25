@@ -40,6 +40,7 @@
             </div>
           </div>
         </li>
+        <div class="li_end"></div>
       </el-scrollbar>
     </ul>
 
@@ -55,10 +56,12 @@
                   :autosize="{ minRows: 2, maxRows: 4 }"
                   class="chat-form__input"
                   placeholder="请输入你的消息"
+                  @keyup.enter="sendMessage"
               ></el-input>
 
               <div style="padding: 0.875rem">
                 <el-button
+                    v-loading="loading"
                     type="primary"
                     size="large"
                     :circle="true"
@@ -106,6 +109,9 @@ const pageSize = ref(10);
 // 用户输入框
 const newMessage = ref("");
 
+// 加载
+const loading = ref(false)
+
 // 接收 sessionList 传递过来的 id
 // const sessionId = route.query.id;
 // 使用 useRoute 提供的 params 获取路由参数
@@ -121,6 +127,8 @@ onBeforeUnmount(() => {
 
 
 const sendMessage = async () => {
+  loading.value = true
+
   if (!isMounted.value) {
     return;
   }
@@ -146,16 +154,18 @@ const sendMessage = async () => {
     // 把响应的回答也加进去
     // messageList.value.push({ id: Date.now(), userId: 0, content: response.data });
     // 加不了一点，重新向后端获取所有数据吧
-    loadData()
+    await loadData()
     // 滚动聊天窗口到底部
     scrollToBottom();
+    loading.value = false;
+    // liend.scrollIntoView({ behavior: "smooth", block: "end");
   }
 };
 // 添加滚动到聊天窗口底部的函数
 const scrollToBottom = () => {
-  const container = document.querySelector('.chat-window__container');
+  const container = document.querySelector('.li_end');
   if (container) {
-    container.scrollTop = container.scrollHeight;
+    container.scrollIntoView({ behavior: "smooth", block: "end"});
   }
 };
 // 接收参数，加载更多

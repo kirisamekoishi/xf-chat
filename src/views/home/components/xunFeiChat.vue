@@ -6,19 +6,19 @@
     >
       How can I help you today?
     </div>
-    <div class="xunfei-chat__form">
-      <el-form>
-        <div class="flex flex-1 flex-col el-form__div">
-          <el-form-item>
-            <el-input v-model="newMessage" type="textarea" />
-          </el-form-item>
+<!--    <div class="xunfei-chat__form">-->
+<!--      <el-form>-->
+<!--        <div class="flex flex-1 flex-col el-form__div">-->
+<!--          <el-form-item>-->
+<!--            <el-input v-model="newMessage" type="textarea" />-->
+<!--          </el-form-item>-->
 
-          <el-form-item>
-            <el-button type="primary" @click="sendMessage">Create</el-button>
-          </el-form-item>
-        </div>
-      </el-form>
-    </div>
+<!--          <el-form-item>-->
+<!--            <el-button type="primary" @click="sendMessage">Create</el-button>-->
+<!--          </el-form-item>-->
+<!--        </div>-->
+<!--      </el-form>-->
+<!--    </div>-->
   </div>
 </template>
 

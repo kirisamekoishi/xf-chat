@@ -23,7 +23,7 @@
 
         <el-form-item>
           <el-input
-            v-model="UserForm.userPassword"
+            v-model="UserForm.checkPassword"
             type="password"
             placeholder="请再输入一次密码"
             show-password

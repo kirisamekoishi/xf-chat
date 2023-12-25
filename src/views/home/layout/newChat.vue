@@ -18,6 +18,7 @@
           v-model="form.title"
           autocomplete="off"
           placeholder="请输入您的标题"
+          @keyup.enter="onSubmit"
         />
       </el-form-item>
     </el-form>

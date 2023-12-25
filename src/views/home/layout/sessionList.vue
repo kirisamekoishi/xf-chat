@@ -12,9 +12,10 @@
           v-for="item of sessionsList"
           :key="item.id"
           class="session-list__item flex items-center justify-center infinite-list-item"
-          @click="toSessionMessageList(item.id)"
       >
-        <div class="session-list__title flex flex-1 items-center overflow-hidden">
+        <div class="session-list__title flex flex-1 items-center overflow-hidden"
+             @click="toSessionMessageList(item.id)"
+        >
           {{ item.title }}
         </div>
         <div class="flex items-center justify-end">
